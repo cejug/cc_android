@@ -1,0 +1,24 @@
+<LinearLayout
+    android:id="@+id/linear"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+     <Button
+        android:id="@+id/bt_adicionar_novo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/adicionar_novo" />
+
+     <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/codigo_empregado" />
+ 
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+ 
+</LinearLayout>
+
