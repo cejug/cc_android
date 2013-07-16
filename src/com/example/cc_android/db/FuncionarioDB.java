@@ -61,7 +61,6 @@ public class FuncionarioDB {
 		
 	}
 	
-	//---retrieves all the contacts---
 	public Cursor getAll() {
 		return db.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_NOME, KEY_SALARIO}, null, null, null, null, null);
 	}
@@ -76,7 +75,7 @@ public class FuncionarioDB {
 		return mCursor;
 	}
 	
-	//---updates a contact---
+
 	public boolean update(long rowId, String nome, double salario) {
 		ContentValues args = new ContentValues();
 		args.put(KEY_NOME, nome);

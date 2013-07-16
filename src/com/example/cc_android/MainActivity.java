@@ -31,46 +31,59 @@ public class MainActivity extends Activity {
 	@SuppressLint("NewApi")
 	public void loadTelaPrincipal() {
 
+		//
 		setContentView(R.layout.activity_main);
 
 		funcionarioDB = new FuncionarioDB(this);
 		funcionarioDB.open();
-
+		
+		// Definir layout das linhas do listView
 		String[] fromColumns = {"nome", "salario"};
 		int[] toViews = {android.R.id.text1, android.R.id.text2};
 
 		// recuperar o Listview da página
 		listView = (ListView) findViewById(R.id.list);
 
+		// montar o adapter, reponsável por alimentar o listView
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
 				android.R.layout.simple_list_item_2,
 				funcionarioDB.getAll(),
 				fromColumns, toViews, 0);
 		
+		// setar o adapter
 		listView.setAdapter(adapter);
 
-		// set ação para a seleção no Listview
+		// setar ação do click da linha do listView
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				
+				// abrir novo.xml
 				setContentView(R.layout.novo);
 
+				//buscar o funcionario selecionado
 				Cursor cursorFunc = funcionarioDB.getById(id);
-
+				
+				//recuperar editText código
 				EditText codigo = (EditText) findViewById(R.id.editTextCodigo);
 				codigo.setText("" + Integer.toString(cursorFunc.getInt(0)),
 						TextView.BufferType.EDITABLE);
-
+				
+				//recuperar editText nome
 				EditText nome = (EditText) findViewById(R.id.editTextNome);
 				nome.setText("" + cursorFunc.getString(1),
 						TextView.BufferType.EDITABLE);
 
+				//recuperar editText salário
 				EditText salario = (EditText) findViewById(R.id.editTextSalario);
 				salario.setText("" + cursorFunc.getDouble(2),
 						TextView.BufferType.EDITABLE);
 
+				//recuperar button salvar
 				Button btSalvar = (Button) findViewById(R.id.bt_salvar);
+				
+				//setar evento de click do button.
 				btSalvar.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View arg0) {
 						Funcionario funcionario = new Funcionario();
