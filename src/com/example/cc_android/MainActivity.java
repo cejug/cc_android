@@ -37,55 +37,56 @@ public class MainActivity extends Activity {
 		funcionarioDB = new FuncionarioDB(this);
 		funcionarioDB.open();
 		
-		// Definir layout das linhas do listView
+		// Definir layout das linhas do listView.
 		String[] fromColumns = {"nome", "salario"};
 		int[] toViews = {android.R.id.text1, android.R.id.text2};
 
-		// recuperar o Listview da página
+		// recuperar o Listview da página.
 		listView = (ListView) findViewById(R.id.list);
 
-		// montar o adapter, reponsável por alimentar o listView
+		// montar o adapter, reponsável por alimentar o listView.
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
 				android.R.layout.simple_list_item_2,
 				funcionarioDB.getAll(),
 				fromColumns, toViews, 0);
 		
-		// setar o adapter
+		// setar o adapter.
 		listView.setAdapter(adapter);
 
-		// setar ação do click da linha do listView
+		// setar ação do click da linha do listView.
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-				// abrir novo.xml
+				// abrir novo.xml.
 				setContentView(R.layout.novo);
 
-				//buscar o funcionario selecionado
+				//buscar o funcionario selecionado.
 				Cursor cursorFunc = funcionarioDB.getById(id);
 				
-				//recuperar editText código
+				//recuperar editText código.
 				EditText codigo = (EditText) findViewById(R.id.editTextCodigo);
 				codigo.setText("" + Integer.toString(cursorFunc.getInt(0)),
 						TextView.BufferType.EDITABLE);
 				
-				//recuperar editText nome
+				//recuperar editText nome.
 				EditText nome = (EditText) findViewById(R.id.editTextNome);
 				nome.setText("" + cursorFunc.getString(1),
 						TextView.BufferType.EDITABLE);
 
-				//recuperar editText salário
+				//recuperar editText salário.
 				EditText salario = (EditText) findViewById(R.id.editTextSalario);
 				salario.setText("" + cursorFunc.getDouble(2),
 						TextView.BufferType.EDITABLE);
 
-				//recuperar button salvar
+				//recuperar button salvar.
 				Button btSalvar = (Button) findViewById(R.id.bt_salvar);
 				
 				//setar evento de click do button.
 				btSalvar.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View arg0) {
+						
 						Funcionario funcionario = new Funcionario();
 
 						EditText codigo = (EditText) findViewById(R.id.editTextCodigo);
@@ -99,15 +100,21 @@ public class MainActivity extends Activity {
 						funcionario.setSalario(Double.parseDouble(salario
 								.getText().toString()));
 						
+						// chamar o update .
 						funcionarioDB.update(funcionario.getId(), funcionario.getNome(), funcionario.getSalario());
 
+						// carregar tela principal.
 						loadTelaPrincipal();
 					}
 				});
-
+				
+				// recuperar button cancelar.
 				Button btCancelar = (Button) findViewById(R.id.bt_cancelar);
+				
+				//setar evento de click do button.
 				btCancelar.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View arg0) {
+						// voltar para a tela principal.
 						loadTelaPrincipal();
 					}
 				});
@@ -123,6 +130,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void loadTelaAddFuncionario() {
+		// setar o conteúdo para novo.xml.
 		setContentView(R.layout.novo);
 
 		Button btSalvar = (Button) findViewById(R.id.bt_salvar);
@@ -140,8 +148,10 @@ public class MainActivity extends Activity {
 				funcionario.setSalario(Double.parseDouble(salario.getText()
 						.toString()));
 				
+				// chamar função insert.
 				funcionarioDB.insert(funcionario);
-
+				
+				// carregar tela principal.
 				loadTelaPrincipal();
 			}
 		});
