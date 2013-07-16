@@ -1,0 +1,15 @@
+# Esses aqui não farão parte dos commits:
+
+*.class
+*.jar
+.settings/
+target/
+bin/
+.classpath
+.project
+
+
+# Ignore . and ~ files except .gitignore #
+*~
+.*
+!/.gitignore
