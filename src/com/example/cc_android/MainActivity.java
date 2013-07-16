@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
 				
 				// abrir novo.xml.
 				setContentView(R.layout.novo);
-
+				
 				//buscar o funcionario selecionado.
 				Cursor cursorFunc = funcionarioDB.getById(id);
 				
@@ -102,6 +102,27 @@ public class MainActivity extends Activity {
 						
 						// chamar o update .
 						funcionarioDB.update(funcionario.getId(), funcionario.getNome(), funcionario.getSalario());
+
+						// carregar tela principal.
+						loadTelaPrincipal();
+					}
+				});
+				
+				
+				Button btRemover = (Button) findViewById(R.id.bt_remover);
+				btRemover.setVisibility(View.VISIBLE);
+				
+				btRemover.setOnClickListener(new View.OnClickListener() {
+					public void onClick(View arg0) {
+						
+						Funcionario funcionario = new Funcionario();
+
+						EditText codigo = (EditText) findViewById(R.id.editTextCodigo);
+						funcionario.setId(Integer.parseInt(codigo.getText()
+								.toString()));
+						
+						// chamar o update .
+						funcionarioDB.delete(funcionario);
 
 						// carregar tela principal.
 						loadTelaPrincipal();

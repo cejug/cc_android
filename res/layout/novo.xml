@@ -56,6 +56,13 @@
             android:text="Salvar" />
 
         <Button
+            android:id="@+id/bt_remover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remover"
+            android:visibility="gone" />
+
+        <Button
             android:id="@+id/bt_cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
