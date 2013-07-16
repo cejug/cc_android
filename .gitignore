@@ -2,11 +2,8 @@
 
 *.class
 *.jar
-.settings/
 target/
 bin/
-.classpath
-.project
 
 
 # Ignore . and ~ files except .gitignore #
